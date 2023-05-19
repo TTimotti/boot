@@ -11,28 +11,28 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
+                .csrf(i -> i.disable())
+                .cors(i -> i.disable())
                 .authorizeHttpRequests(request ->
                         request
                                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                                .requestMatchers("/", "/assets/**", "/user/signIn", "/user/signUp", "/css/**", "/js/**", "/images/**", "/post/**").permitAll()
+                                .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**", "/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login ->
-                            login
-                                    .loginPage("/user/signIn") // 커스텀 로그인 페이지 지정
-                                    .loginProcessingUrl("/login") // submit 받을 URL
-                                    .usernameParameter("userId") // username를 대체할 이름 설정
-                                    .defaultSuccessUrl("/", true) // 성공시 이동할 URL
-                                    .failureUrl("/user/signIn?ERR") // 추후에 핸들러로 모달
-                                    .permitAll()
+                        login
+                                .loginPage("/index") // 커스텀 로그인 페이지 지정
+                                .loginProcessingUrl("/login") // submit 받을 URL
+                                .usernameParameter("userId") // username를 대체할 이름 설정
+                                .defaultSuccessUrl("/", true) // 성공시 이동할 URL
+                                .failureUrl("/user/signIn?ERR") // 추후에 핸들러로 모달
+                                .permitAll()
 
                 )
                 .logout(logout ->
-                            logout
-                                    .logoutUrl("/logout")
-                                    .logoutSuccessUrl("/")
+                        logout
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/")
 
                 );
 
