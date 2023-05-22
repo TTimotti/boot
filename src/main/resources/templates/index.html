@@ -11,8 +11,14 @@
     <th:block layout:fragment="css"></th:block>
 </head>
 <body>
-<div layout:fragment="content">
-    <h1>Hello, World!</h1>
+<div layout:fragment="content" class="d-flex flex-grow-1 bg-danger vh-100">
+    <article class="d-flex">
+        <div class="">
+            Hello, World!
+            Content Area
+        </div>
+    </article>
+
 </div>
 <!--content script-->
 <th:block layout:fragment="script"></th:block>
