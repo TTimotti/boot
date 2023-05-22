@@ -6,29 +6,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <link rel="icon" type="image/x-icon" th:href="@{ /favicon.ico }"/>
-    <!--Default CSS-->
+    <meta name="description" content="Boot"/>
+    <meta name="author" content="TTimotti"/>
+    <link rel="icon" type="image/x-icon" th:href="@{ /assets/icon/favicon.ico }"/>
+    <!--Layout CSS-->
     <link th:href="@{ /css/bootstrap.min.css }" rel="stylesheet"/>
-    <!-- content css -->
+    <!--Content CSS-->
     <th:block layout:fragment="css"></th:block>
 </head>
 <body>
-<!-- 공통 header -->
+<!--공통 header-->
 <th:block th:replace="~{ fragments/header :: headerFragment }"></th:block>
-<!-- 공통 nav -->
+<!--공통 nav-->
 <th:block th:replace="~{ fragments/nav :: navFragment }"></th:block>
-<!-- 공통 aside -->
+<!--공통 aside-->
 <th:block th:replace="~{ fragments/aside :: asideFragment }"></th:block>
-<!-- content Area -->
+<!--Content Area-->
 <th:block layout:fragment="content"></th:block>
-<!-- 공통 footer -->
+<!--공통 footer-->
 <th:block th:replace="~{ fragments/footer :: footerFragment }"></th:block>
-<!--Default Java Script-->
-<script th:src="@{ /js/bootstrap.bundle.min.js }"></script>
-<script th:src="@{ /js/jquery-3.7.0.min.js }"></script>
-<!-- content script -->
+<!--Layout Script-->
+<script th:src="@{ /scripts/bootstrap.bundle.min.js }"></script>
+<script th:src="@{ /scripts/jquery-3.7.0.min.js }"></script>
+<!--Content Script-->
 <th:block layout:fragment="script"></th:block>
 </body>
 </html>

@@ -21,7 +21,7 @@ public class SecurityConfig {
                 )
                 .formLogin(login ->
                         login
-                                .loginPage("/common/modal") // 커스텀 로그인 페이지 지정
+                                .loginPage("/index") // 커스텀 로그인 페이지 지정
                                 .loginProcessingUrl("/login") // submit 받을 URL
                                 .usernameParameter("userId") // username를 대체할 이름 설정
                                 .defaultSuccessUrl("/", true) // 성공시 이동할 URL
