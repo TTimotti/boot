@@ -11,8 +11,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(i -> i.disable())
-                .cors(i -> i.disable())
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request ->
                         request
                                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
@@ -21,7 +21,7 @@ public class SecurityConfig {
                 )
                 .formLogin(login ->
                         login
-                                .loginPage("/index") // 커스텀 로그인 페이지 지정
+                                .loginPage("/common/modal") // 커스텀 로그인 페이지 지정
                                 .loginProcessingUrl("/login") // submit 받을 URL
                                 .usernameParameter("userId") // username를 대체할 이름 설정
                                 .defaultSuccessUrl("/", true) // 성공시 이동할 URL
