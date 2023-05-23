@@ -1,77 +1,47 @@
-<!DOCTYPE html>
-<html lang="ko"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{ layouts/user_layout }">
-<head>
-    <meta charset="UTF-8">
-    <title>Sign Up Page</title>
-    <!--content css-->
-    <th:block layout:fragment="css">
-    </th:block>
-</head>
-<body>
-<div layout:fragment="content">
-    <article class="d-flex justify-content-center">
-        <div class="d-flex flex-column w-75">
-            <div class="">
-                Hello, World!
-                Content Area
+<html xmlns:th="http://www.thymeleaf.org">
+<!--회원가입 모달-->
+<div th:fragment="userInsertFragment">
+    <div class="modal fade" tabindex="-1" id="signUpModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{ /user/insert }" method="post">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="userId" name="userId" placeholder="ID"/>
+                            <div id="userIdMsg" class="form-text">사용할 아이디를 입력하세요.</div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="userName" name="userName" placeholder="Name"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="nickName" name="nickName"
+                                   placeholder="NickName"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   autocomplete="false" placeholder="Password"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword"
+                                   autocomplete="false" placeholder="Repeat Password"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" class="form-control btn btn-success" id="submitBtn" name="submitBtn"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Next</button>
+                        <button type="button" class="btn btn-primary">Next</button>
+                    </div>
+                </div>
             </div>
-            <p> Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem
-                ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsum</p>
-            <p> Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem
-                ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsum</p>
-            <p> Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem
-                ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsum</p>
-            <p> Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem
-                ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsum</p>
-            <p> Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem
-                ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsum</p>
-            <p> Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem
-                ipsumLorem ipsum Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumLorem ipsum Lorem
-                ipsum
-                Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem
-                ipsumLorem ipsum</p>
         </div>
-    </article>
-
+    </div>
 </div>
-<!--content script-->
-<th:block layout:fragment="script"></th:block>
-</body>
 </html>

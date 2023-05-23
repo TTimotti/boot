@@ -22,13 +22,15 @@
 <th:block th:replace="~{ fragments/nav :: navFragment }"></th:block>
 <!--Content Area-->
 <th:block layout:fragment="content"></th:block>
-
 <!--공통 footer-->
 <th:block th:replace="~{ fragments/footer :: footerFragment }"></th:block>
+<!--공통 modal-->
+<th:block th:replace="~{ user/insert :: userInsertFragment }"></th:block>
 <!--Layout Script-->
-<script th:src="@{ /scripts/bootstrap.bundle.min.js }"></script>
 <script th:src="@{ /scripts/jquery-3.7.0.min.js }"></script>
 <script th:src="@{ /scripts/fontawesome.js }" crossorigin="anonymous"></script>
+<script th:src="@{ /scripts/bootstrap.bundle.min.js }"></script>
+<script th:src="@{ /scripts/common.modals.js }"></script>
 <!--Content Script-->
 <th:block layout:fragment="script"></th:block>
 </body>

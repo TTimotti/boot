@@ -1,8 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--footerFragment 선언-->
-<div th:fragment="footerFragment" class="d-flex justify-content-center bg-success text-white">
-    <footer class="w-75">
-        Footer Area
+<div th:fragment="footerFragment">
+    <footer class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <span class="mb-3 mb-md-0 text-muted">&copy; 2023 by. TTimotti</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram fs-1"></i></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-twitch fs-1"></i></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-discord fs-1"></i></a></li>
+            </ul>
+        </div>
     </footer>
 </div>
 </html>

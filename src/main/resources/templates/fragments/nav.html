@@ -1,24 +1,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--navFragment 선언-->
 <div th:fragment="navFragment">
-    <nav class="d-flex justify-content-center">
-        <div class="w-75 my-auto">
-            <ul class="nav nav-pills nav-justified">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">Link1 Active</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Link2</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Link3</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Link4</a>
-                </li>
-            </ul>
-            <hr class="border border-primary border-2 opacity-100 mt-0"/>
-        </div>
+    <nav class="container">
+        <ul class="nav nav-pills nav-justified border-bottom mb-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" aria-current="page">Link1 Active</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Link2</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Link3</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Link4</a>
+            </li>
+        </ul>
     </nav>
 </div>
 </html>
