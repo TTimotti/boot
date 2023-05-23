@@ -18,14 +18,8 @@
 <body id="top">
 <!--공통 header-->
 <th:block th:replace="~{ fragments/header :: headerFragment }"></th:block>
-<!--공통 nav-->
-<th:block th:replace="~{ fragments/nav :: navFragment }"></th:block>
-<div id="main" class="d-flex justify-content-center bg-info">
-    <div id="main-wrapper" class="d-flex align-items-stretch w-75">
-        <!--Content Area-->
-        <th:block layout:fragment="content"></th:block>
-    </div>
-</div>
+<!--Content Area-->
+<th:block layout:fragment="content"></th:block>
 <!--공통 footer-->
 <th:block th:replace="~{ fragments/footer :: footerFragment }"></th:block>
 <!--Layout Script-->
