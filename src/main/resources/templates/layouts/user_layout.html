@@ -22,8 +22,6 @@
 <th:block th:replace="~{ fragments/nav :: navFragment }"></th:block>
 <div id="main" class="d-flex justify-content-center bg-info">
     <div id="main-wrapper" class="d-flex align-items-stretch w-75">
-        <!--공통 aside-->
-        <th:block th:replace="~{ fragments/aside :: asideFragment }"></th:block>
         <!--Content Area-->
         <th:block layout:fragment="content"></th:block>
     </div>

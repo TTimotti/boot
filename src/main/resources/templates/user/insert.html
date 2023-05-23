@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{ layouts/user_layout }">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up Page</title>
+    <!--content css-->
+    <th:block layout:fragment="css">
+    </th:block>
+</head>
+<body>
+<div layout:fragment="content" class="d-flex justify-content-center flex-grow-1 bg-danger vh-100">
+    <article class="justify-content-center">
+        <div class="">
+            Hello, World!
+            Content Area
+        </div>
+    </article>
+
+</div>
+<!--content script-->
+<th:block layout:fragment="script"></th:block>
+</body>
+</html>

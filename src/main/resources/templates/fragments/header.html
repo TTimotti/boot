@@ -1,10 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--headerFragment 선언-->
 <div th:fragment="headerFragment">
-    <header class="d-flex justify-content-center bg-black text-white" style="height: 100px">
+    <header class="d-flex justify-content-center" style="height: 100px">
         <div class="d-flex justify-content-between w-75 my-auto">
-            <div>Logo Area</div>
-            <div>User Info Area</div>
+            <div>
+                <a th:href="@{ /index }" class="text-primary text-decoration-none h1">
+                    <i class="bi bi-heart-pulse-fill h1"></i>
+                    <span>Logo</span>
+                </a>
+            </div>
+            <div class="d-flex justify-content-around align-content-center my-auto">
+                <div class="btn-group" role="group">
+                    <a href="#" class="btn btn-outline-success">Login</a>
+                    <a th:href="@{ /user/insert }" class="btn btn-outline-primary">SignUp</a>
+                </div>
+            </div>
+            <div class="d-none">
+                <a>Logout</a>
+            </div>
         </div>
     </header>
 </div>
