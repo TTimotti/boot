@@ -18,8 +18,7 @@ public class UserController {
     @PostMapping(value = "/insert")
     public ResponseEntity<String> userInsert(UserInsertDto dto) {
         log.info("dto = {}", dto);
-        userService.getClass();
 
-        return ResponseEntity.ok(dto.getUserId());
+        return ResponseEntity.ok(userService.userInsert(dto));
     }
 }

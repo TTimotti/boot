@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!--회원가입 모달-->
+<div th:fragment="modalsFragment">
+    <div class="modal fade" tabindex="-1" id="infoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalTitle"></h5>
+                </div>
+                <div class="modal-body">
+                    <pre id="infoModalBody"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="infoModalBtn" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
