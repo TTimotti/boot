@@ -1,19 +1,25 @@
 package intj.project.boot.controller;
 
+import intj.project.boot.dto.UserInsertDto;
+import intj.project.boot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/user")
 public class UserController {
-    @GetMapping(value = "/insert")
-    public String bbs() {
+    private final UserService userService;
+    @PostMapping(value = "/insert")
+    public ResponseEntity<String> userInsert(UserInsertDto dto) {
+        log.info("dto = {}", dto);
+        userService.getClass();
 
-        return "/user/insert";
+        return ResponseEntity.ok(dto.getUserId());
     }
 }
