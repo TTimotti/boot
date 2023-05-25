@@ -5,11 +5,14 @@ import intj.project.boot.entity.UserEntity;
 import intj.project.boot.exception.ServiceException;
 import intj.project.boot.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
     private final UserMapper userMapper;
@@ -26,10 +29,13 @@ public class UserService {
                 .roleId(1)
                 .build();
 
-        int result = userMapper.insertUser(user);
-        if (result == 0) {
-            throw new ServiceException("UserInsert Query Error");
+        try {
+            userMapper.insertUser(user);
+        } catch (DataIntegrityViolationException e) {
+            log.error("ERROR={}", e);
+            throw new ServiceException("UserInsert Query Error :: DB INSERT 실패");
         }
+
         return user.getUsername();
     }
 }

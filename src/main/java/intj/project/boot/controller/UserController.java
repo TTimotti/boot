@@ -10,15 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@RestController
 @RequiredArgsConstructor
+@RestController
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
     @PostMapping(value = "/insert")
     public ResponseEntity<String> userInsert(UserInsertDto dto) {
         log.info("dto = {}", dto);
-
         return ResponseEntity.ok(userService.userInsert(dto));
     }
 }
