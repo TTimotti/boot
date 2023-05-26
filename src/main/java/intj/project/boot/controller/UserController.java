@@ -1,5 +1,6 @@
 package intj.project.boot.controller;
 
+import intj.project.boot.dto.CheckIdDto;
 import intj.project.boot.dto.UserInsertDto;
 import intj.project.boot.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,8 +23,8 @@ public class UserController {
         return ResponseEntity.ok(userService.userInsert(dto));
     }
     @PostMapping(value = "/check")
-    public ResponseEntity<String> userIdCheck(@RequestBody Map<String, String> map) {
-        String userId = map.get("userId");
+    public ResponseEntity<String> userIdCheck(@RequestBody CheckIdDto dto) {
+        String userId = dto.getUserId();
         log.info("userId = {}", userId);
         return ResponseEntity.ok(userService.userSelectByUserId(userId));
     }

@@ -24,10 +24,18 @@ function signUpHandle() {
     const modal = document.getElementById('signUpModal');
     const id = modal.querySelector('#insertUserId').value;
     const pw = modal.querySelector('#insertPassword').value;
-    if (checkForm(id, pw) === false) return false;
+    if (checkFormAndInsert(id, pw) === false) return false;
 }
 
-async function checkForm(id, pw) {
+function signInHandle() {
+    const modal = document.getElementById('signInModal');
+    const id = modal.querySelector('#selectUserId').value;
+    const pw = modal.querySelector('#selectPassword').value;
+    axios
+        .post('/login')
+}
+
+function checkFormAndInsert(id, pw) {
     const idTag = document.getElementById('insertUserId');
     const idFeedback = document.getElementById('insertUserIdFeedback');
     const pwTag = document.getElementById('insertPassword');
@@ -51,7 +59,6 @@ async function checkForm(id, pw) {
             pwFeedback.setAttribute('class', 'invalid-feedback');
         }
     }
-    // 아이디 조건 및 유효성 검사
     // (1) 공백 또는 null 검사
     if (id.trim() === '') {
         feedback.idInValidFeedback('사용할 이메일 주소를 입력하세요');
@@ -65,15 +72,17 @@ async function checkForm(id, pw) {
     }
     // (3) 정규식(비밀번호) 검사
     const pwReg = /^(?=.+\d)(?=.+[a-zA-Z])[\da-zA-Z!@#$%&*]{4,24}$/;
+    if (pw.trim() === '') {
+        feedback.pwInValidFeedback('사용할 비밀번호를 입력하세요.');
+        return false;
+    }
     if (!pwReg.test(pw)) {
         feedback.pwInValidFeedback('사용할 수 없는 비밀번호입니다.');
         return false;
     }
-    // (1), (2), (3) 성공시 아이디 중복검사
-    // (4) 중복 검사, 비동기
     const checkDB = function () {
         axios
-            .post('/user/check', {
+            .post('/user/check',{
                 userId: id
             })
             .then(res => {
@@ -85,12 +94,11 @@ async function checkForm(id, pw) {
             })
             .then((res) => {
                 if (res === false) return false;
-                const data = {
-                    userId: id,
-                    password: pw
-                };
                 axios
-                    .post('/user/insert', data)
+                    .post('/user/insert', {
+                        userId: id,
+                        password: pw
+                    })
                     .then(res => {
                         signUpModal.hide();
                         modals.showMessageCallbackModal('Success', `${res.data}님, 환영합니다.`, '로그인', function () {

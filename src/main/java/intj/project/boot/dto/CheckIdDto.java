@@ -1,12 +1,12 @@
 package intj.project.boot.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
+@NoArgsConstructor
 @ToString
-@AllArgsConstructor
 public class CheckIdDto {
     private String userId;
 }
