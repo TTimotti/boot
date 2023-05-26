@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -16,12 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
     @PostMapping(value = "/insert")
-    public ResponseEntity<String> userInsert(UserInsertDto dto) {
-        log.info("dto = {}", dto);
+    public ResponseEntity<String> userInsert(@RequestBody UserInsertDto dto) {
+        log.info("dto.userId = {}", dto.getUserId());
         return ResponseEntity.ok(userService.userInsert(dto));
     }
     @PostMapping(value = "/check")
-    public ResponseEntity<String> userIdCheck(String userId) {
+    public ResponseEntity<String> userIdCheck(@RequestBody Map<String, String> map) {
+        String userId = map.get("userId");
         log.info("userId = {}", userId);
         return ResponseEntity.ok(userService.userSelectByUserId(userId));
     }

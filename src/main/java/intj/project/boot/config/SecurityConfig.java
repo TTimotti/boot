@@ -20,12 +20,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request ->
                         request
                                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                                .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**", "/**", "/user/**").permitAll()
+                                .requestMatchers("/assets/**", "/css/**", "/scripts/**", "/*", "/user/*").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login ->
                         login
-                                .loginPage("/user/select") // 커스텀 로그인 페이지 지정
+                                .loginPage("/index") // 커스텀 로그인 페이지 지정
                                 .loginProcessingUrl("/login") // submit 받을 URL
                                 .usernameParameter("userId") // username를 대체할 이름 설정
                                 .defaultSuccessUrl("/", true) // 성공시 이동할 URL

@@ -44,11 +44,6 @@ async function checkForm(id, pw) {
             idFeedback.innerText = msg;
             idFeedback.setAttribute('class', 'invalid-feedback');
         },
-        pwValidFeedback: function (msg) {
-            pwTag.setAttribute('class', 'form-control rounded-3 is-valid');
-            pwFeedback.innerText = msg;
-            pwFeedback.setAttribute('class', 'valid-feedback');
-        },
         pwInValidFeedback: function (msg) {
             pwTag.focus();
             pwTag.setAttribute('class', 'form-control rounded-3 is-invalid');
@@ -76,37 +71,45 @@ async function checkForm(id, pw) {
     }
     // (1), (2), (3) 성공시 아이디 중복검사
     // (4) 중복 검사, 비동기
-    const data = new FormData();
-    data.append('userId', id);
-    const checkDB = function (data) {
+    const checkDB = function () {
         axios
-            .post('/user/check', data)
+            .post('/user/check', {
+                userId: id
+            })
             .then(res => {
                 if (res.data !== '') {
                     feedback.idInValidFeedback('이미 가입된 이메일입니다');
                     return false;
                 }
                 feedback.idValidFeedback('사용 가능한 이메일입니다');
-                signUpModal.hide();
-                modals.showMessageCallbackModal('Success', `회원가입에 성공하였습니다.`, '로그인', function () {
-                    console.log('test');
-                    userModal.showSignInModal();
-                });
+            })
+            .then((res) => {
+                if (res === false) return false;
+                const data = {
+                    userId: id,
+                    password: pw
+                };
+                axios
+                    .post('/user/insert', data)
+                    .then(res => {
+                        signUpModal.hide();
+                        modals.showMessageCallbackModal('Success', `${res.data}님, 환영합니다.`, '로그인', function () {
+                            console.log('test');
+                            userModal.showSignInModal();
+                        });
+                    })
+                    .catch(err => {
+                        signUpModal.hide();
+                        modals.showMessageModal('Failed', err, '확인');
+                    })
             })
             .catch(err => {
                 signUpModal.hide();
                 modals.showMessageModal('Failed', err, '확인');
             })
     }
-    checkDB(data);
+    checkDB();
 }
-
 function replaceInput(tag) {
     tag.setAttribute('class', 'form-control rounded-3')
 }
-
-
-
-
-
-
