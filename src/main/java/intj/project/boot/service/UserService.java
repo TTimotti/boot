@@ -32,10 +32,18 @@ public class UserService {
         try {
             userMapper.insertUser(user);
         } catch (DataIntegrityViolationException e) {
-            log.error("ERROR={}", e);
+            log.error("ERROR={}", e.getMessage());
             throw new ServiceException("UserInsert Query Error :: DB INSERT 실패");
         }
 
+        return user.getUsername();
+    }
+
+    public String userSelectByUserId(String userId) {
+        UserEntity user = userMapper.selectUserByUserId(userId);
+        if (user==null) {
+            return null;
+        }
         return user.getUsername();
     }
 }

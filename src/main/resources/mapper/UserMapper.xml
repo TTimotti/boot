@@ -23,4 +23,15 @@
             #{ roleId }
             )
     </insert>
+    <select id="selectUserByUserId" resultType="UserEntity">
+        SELECT seq,
+               user_id,
+               user_name,
+               password,
+               create_dt,
+               last_login_dt,
+               role_id
+        FROM boot_user
+        WHERE user_id = #{ userId }
+    </select>
 </mapper>

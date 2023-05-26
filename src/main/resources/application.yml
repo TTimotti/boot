@@ -4,6 +4,14 @@ spring:
     url: jdbc:oracle:thin:@192.168.100.75:1521:xe
     username: dev01
     password: 1234
+server:
+  port: 8080
+  servlet:
+    context-path:  # 진입점
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 #  web:
 #    resources:
 #      static-locations: classpath:/templates/, classpath:/static/

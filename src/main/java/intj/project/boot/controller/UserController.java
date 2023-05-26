@@ -20,4 +20,9 @@ public class UserController {
         log.info("dto = {}", dto);
         return ResponseEntity.ok(userService.userInsert(dto));
     }
+    @PostMapping(value = "/check")
+    public ResponseEntity<String> userIdCheck(String userId) {
+        log.info("userId = {}", userId);
+        return ResponseEntity.ok(userService.userSelectByUserId(userId));
+    }
 }

@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <div th:fragment="userFragment">
     <!--회원가입-->
     <div class="modal fade py-5" tabindex="-1" id="signUpModal">
@@ -13,21 +13,20 @@
                     <form id="signUpForm">
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-3" id="insertUserId" name="userId"
-                                   placeholder="name@example.com" onkeyup="replaceInput(this);">
+                                   placeholder="name@example.com" onkeyup="replaceInput(this);" autocomplete="off" maxlength="64">
                             <label for="insertUserId">Email address</label>
-                            <div class="valid-feedback" id="userIdFeedback" style="margin-left: 4px">
-                                사용 가능한 아이디
-                            </div>
+                            <div id="insertUserIdFeedback" style="margin-left: 4px"></div>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-3" id="insertPassword" name="password"
-                                   placeholder="Password" autocomplete="false" onkeyup="replaceInput(this);">
+                                   placeholder="Password" autocomplete="off" onkeyup="replaceInput(this);" maxlength="32">
                             <label for="insertPassword">Password</label>
+                            <div id="insertPasswordFeedback" style="margin-left: 4px"></div>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button"
                                 onclick="signUpHandle()">Sign Up
                         </button>
-                        <small class="text-muted">By clicking Sign up, you agree to the <a href="#">terms of
+                        <small class="text-muted">By clicking Sign up, you agree to the <a href="https://third9.github.io/posts/Axios%EB%8B%A4%EC%96%91%ED%95%98%EA%B2%8C_%ED%99%9C%EC%9A%A9%ED%95%98%EA%B8%B0-async_await%EC%82%AC%EC%9A%A9/" target='_blank'>terms of
                             use</a>.</small>
                     </form>
                 </div>
@@ -47,12 +46,12 @@
                     <form id="signInForm">
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control rounded-3" id="selectUserId" name="userId"
-                                   placeholder="name@example.com" required>
+                                   placeholder="name@example.com" autocomplete="off" maxlength="64">
                             <label for="selectUserId">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control rounded-3" id="selectPassword" name="password"
-                                   placeholder="Password" autocomplete="false" required>
+                                   placeholder="Password" autocomplete="off" maxlength="32">
                             <label for="selectPassword">Password</label>
                         </div>
                         <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="button" onclick="close()">Sign

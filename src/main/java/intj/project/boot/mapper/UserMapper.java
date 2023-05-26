@@ -5,5 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    int insertUser(UserEntity user);
+    void insertUser(UserEntity user);
+    UserEntity selectUserByUserId(String userId);
 }

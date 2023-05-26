@@ -16,7 +16,7 @@ import java.util.List;
 @ToString
 @Builder
 public class UserEntity implements UserDetails {
-    private long seq;
+    private int seq;
     private String userId;
     private String userName;
     private String password;
@@ -26,7 +26,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
         return authorities;

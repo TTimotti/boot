@@ -3,7 +3,7 @@ let signInModal;
 const userModal = {
     showSignUpModal: function () {
         const modal = document.getElementById('signUpModal');
-        modal.addEventListener('hidden.bs.modal', function (e) {
+        modal.addEventListener('hidden.bs.modal', function () {
             replaceInput(modal.querySelector('#insertUserId'));
             modal.querySelector('#signUpForm').reset();
         });
@@ -12,7 +12,8 @@ const userModal = {
     }, showSignInModal: function () {
         const modal = document.getElementById('signInModal');
         signInModal = new bootstrap.Modal(modal, {'backdrop': 'static'});
-        modal.addEventListener('hidden.bs.modal', function (e) {
+        modal.addEventListener('hidden.bs.modal', function () {
+            replaceInput(modal.querySelector('#selectUserId'));
             modal.querySelector('#signInForm').reset();
         });
         signInModal.show();
@@ -23,42 +24,89 @@ function signUpHandle() {
     const modal = document.getElementById('signUpModal');
     const id = modal.querySelector('#insertUserId').value;
     const pw = modal.querySelector('#insertPassword').value;
-    if (checkId(id) === false || checkPw(pw) === false) return false;
-    return false;
-    // 아이디 중복 검사, 아이디와 비밀번호 유효성 검사 통과시
-    // DB에 저장
-    // 저장 성공 시 회원 가입 모달 종료 -> 회원가입 성공 안내(모달?)
-    // 성공 안내 확인시 로그인 모달 띄움
-    axios
-        .post('/user/insert')
+    if (checkForm(id, pw) === false) return false;
 }
 
-function checkId(id) {
+async function checkForm(id, pw) {
     const idTag = document.getElementById('insertUserId');
+    const idFeedback = document.getElementById('insertUserIdFeedback');
+    const pwTag = document.getElementById('insertPassword');
+    const pwFeedback = document.getElementById('insertPasswordFeedback');
+    const feedback = {
+        idValidFeedback: function (msg) {
+            idTag.setAttribute('class', 'form-control rounded-3 is-valid');
+            idFeedback.innerText = msg;
+            idFeedback.setAttribute('class', 'valid-feedback');
+        },
+        idInValidFeedback: function (msg) {
+            idTag.focus();
+            idTag.setAttribute('class', 'form-control rounded-3 is-invalid');
+            idFeedback.innerText = msg;
+            idFeedback.setAttribute('class', 'invalid-feedback');
+        },
+        pwValidFeedback: function (msg) {
+            pwTag.setAttribute('class', 'form-control rounded-3 is-valid');
+            pwFeedback.innerText = msg;
+            pwFeedback.setAttribute('class', 'valid-feedback');
+        },
+        pwInValidFeedback: function (msg) {
+            pwTag.focus();
+            pwTag.setAttribute('class', 'form-control rounded-3 is-invalid');
+            pwFeedback.innerText = msg;
+            pwFeedback.setAttribute('class', 'invalid-feedback');
+        }
+    }
     // 아이디 조건 및 유효성 검사
-    if (id.trim() === '' || id === null) {
-        console.log('실행됨');
-        idTag.setAttribute('class', 'form-control rounded-3 is-invalid');
+    // (1) 공백 또는 null 검사
+    if (id.trim() === '') {
+        feedback.idInValidFeedback('사용할 이메일 주소를 입력하세요');
         return false;
     }
-    idTag.setAttribute('class', 'form-control rounded-3 is-valid');
-    return false;
-
-    // 실패시 조건 안내문 출력
-    // 성공시 아이디 중복검사
-    // axios
-    //     .post(아이디 체크, 아이디)
-    //     .then(회원가입 모달 종료, 로그인 모달 실행)
-    //     .catch(중복 메세지 안내, false 리턴)
-
-}
-
-function checkPw(pw) {
-    // 비밀먼호 조건 및 유효성 검사
-    // 실패시 조건 안내문 출력, false 리턴
-
+    // (2) 정규식(이메일형식) 검사
+    const idReg = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (!idReg.test(id)) {
+        feedback.idInValidFeedback('올바른 이메일을 사용하세요');
+        return false;
+    }
+    // (3) 정규식(비밀번호) 검사
+    const pwReg = /^(?=.+\d)(?=.+[a-zA-Z])[\da-zA-Z!@#$%&*]{4,24}$/;
+    if (!pwReg.test(pw)) {
+        feedback.pwInValidFeedback('사용할 수 없는 비밀번호입니다.');
+        return false;
+    }
+    // (1), (2), (3) 성공시 아이디 중복검사
+    // (4) 중복 검사, 비동기
+    const data = new FormData();
+    data.append('userId', id);
+    const checkDB = function (data) {
+        axios
+            .post('/user/check', data)
+            .then(res => {
+                if (res.data !== '') {
+                    feedback.idInValidFeedback('이미 가입된 이메일입니다');
+                    return false;
+                }
+                feedback.idValidFeedback('사용 가능한 이메일입니다');
+                signUpModal.hide();
+                modals.showMessageCallbackModal('Success', `회원가입에 성공하였습니다.`, '로그인', function () {
+                    console.log('test');
+                    userModal.showSignInModal();
+                });
+            })
+            .catch(err => {
+                signUpModal.hide();
+                modals.showMessageModal('Failed', err, '확인');
+            })
+    }
+    checkDB(data);
 }
 
 function replaceInput(tag) {
     tag.setAttribute('class', 'form-control rounded-3')
 }
+
+
+
+
+
+
