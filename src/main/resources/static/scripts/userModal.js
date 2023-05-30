@@ -29,10 +29,17 @@ function signUpHandle() {
 
 function signInHandle() {
     const modal = document.getElementById('signInModal');
-    const id = modal.querySelector('#selectUserId').value;
-    const pw = modal.querySelector('#selectPassword').value;
+    const data = new FormData(modal.querySelector('#signInForm'));
     axios
-        .post('/login')
+        .post('/loginProcess', data, {
+            headers: 'multipart/form-data'
+        })
+        .then(res =>{
+            console.info(res)
+        })
+        .catch(err => {
+            console.error(err)
+        })
 }
 
 function checkFormAndInsert(id, pw) {

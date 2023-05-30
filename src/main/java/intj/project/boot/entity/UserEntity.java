@@ -3,6 +3,7 @@ package intj.project.boot.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @ToString
 @Builder
+@Slf4j
 public class UserEntity implements UserDetails {
     private int seq;
     private String userId;
@@ -27,14 +29,19 @@ public class UserEntity implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-
+        log.info("혹시 여기서 에러가 나는 걸까?");
+        if (roleId==9) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_SUPER_ADMIN"));
+        } else if (roleId==1) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        log.info("authorities ={};", authorities);
         return authorities;
     }
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.userId;
     }
 
     @Override

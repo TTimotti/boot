@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content="Boot"/>
     <meta name="author" content="TTimotti"/>
+    <title>Boot</title>
     <link rel="icon" type="image/x-icon" th:href="@{ /assets/icon/favicon.ico }"/>
     <!--Layout CSS-->
     <link th:href="@{ /css/bootstrap.min.css }" rel="stylesheet"/>
@@ -34,6 +35,12 @@
 
 <script th:src="@{ /scripts/userModal.js }"></script>
 <script th:src="@{ /scripts/modals.js }"></script>
+<script th:inline="javascript">
+    const uri = [[${uri}]];
+    if (uri) {
+        userModal.showSignInModal();
+    }
+</script>
 <!--Content Script-->
 <th:block layout:fragment="script"></th:block>
 </body>

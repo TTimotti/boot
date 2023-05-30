@@ -2,7 +2,7 @@ package intj.project.boot.controller;
 
 import intj.project.boot.dto.CheckIdDto;
 import intj.project.boot.dto.UserInsertDto;
-import intj.project.boot.service.UserService;
+import intj.project.boot.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
     @PostMapping(value = "/insert")
     public ResponseEntity<String> userInsert(@RequestBody UserInsertDto dto) {
         log.info("dto.userId = {}", dto.getUserId());
